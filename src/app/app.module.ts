@@ -4,15 +4,29 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { DataService } from './data/data.service';
+
+import { ListComponent } from './modules/list/list.component';
+import { EventsListComponent } from './modules/list/events-list/events-list.component';
+import { EventComponent } from './modules/list/event/event.component';
+
+import { MapComponent } from './modules/map/map.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapComponent,
+    ListComponent,
+    EventsListComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,21 @@
+<div class="list-container">
+  <ul *ngFor="let category of this.list">
+    <li>
+      <div class="category-name">
+        {{ category.name }}
+      </div>
+      <ul *ngFor="let event of category.events">
+        <li>
+          <div class="event-name"
+            [ngClass]="{'active': event.id == this.currentEventId}"
+            (click)="selectEvent(event.id)">
+            <span class="event-name-text">{{ event.name }}</span>
+            <span class="event-name-cursor"></span>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  
+  <div class="line"></div>
+</div>
