@@ -12,6 +12,8 @@ export class EventComponent implements OnInit {
   eventWidth: number;
   margin: number = 5;
 
+  loaded: boolean = false;
+
   constructor(private renderer: Renderer2, private el:ElementRef) { }
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class EventComponent implements OnInit {
     this.loadedImageCount++;
     if(this.loadedImageCount == this.event.images.length) {
       this.resizeImages();
+      this.loaded = true;
     }
   }
 
