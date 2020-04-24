@@ -7,7 +7,7 @@
       <ul *ngFor="let event of category.events">
         <li>
           <div class="event-name"
-            [ngClass]="{'active': event.id == this.currentEventId}"
+            [ngClass]="{'active': event.id == this.selectedEventId}"
             (click)="selectEvent(event.id)">
             <span class="event-name-text">{{ event.name }}</span>
             <span class="event-name-cursor"></span>

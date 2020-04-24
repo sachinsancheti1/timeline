@@ -19,6 +19,10 @@ export class DataService {
 
     let currentId: number = 0;
     for(let i=0; i<this.events.length; i++) {
+      if(this.events[i].date.length == 7) {
+        this.events[i].date = this.events[i].date + '-00';
+      }
+
       // We get/set category
       let year: string = this.events[i].date.substring(0, 4);
       let categoryI: number = this.getEventListCategoryI(year);
@@ -68,6 +72,9 @@ export class DataService {
     for(let i=0; i<this.eventsList.length; i++) {
       events = events.concat(this.eventsList[i].events);
     }
+    this.events.sort(function(a: any, b: any) {
+      return b.date.replace(/-/g, '') - a.date.replace(/-/g, '');
+    });
     return events;
   }
 }

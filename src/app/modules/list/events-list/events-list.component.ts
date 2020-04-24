@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 import { DataService } from '../../../data/data.service';
 
@@ -7,19 +7,16 @@ import { DataService } from '../../../data/data.service';
   templateUrl: './events-list.component.html'
 })
 export class EventsListComponent {
+  @Input() selectedEventId: number;
   @Output() eventSelect = new EventEmitter();
 
   list: any;
 
-  currentEventId: number;
-
   constructor(private data: DataService) {
     this.list = this.data.getList();
-    this.selectEvent(this.list[0].events[0].id);
   }
 
   selectEvent(eventId: number): void {
-    this.currentEventId = eventId;
     this.eventSelect.emit(eventId);
   }
 }

@@ -1,5 +1,8 @@
 <div class="list-container">
-  <app-events-list (eventSelect)="displayEvent($event)"></app-events-list>
+  <app-events-list
+    (eventSelect)="displayEvent($event)"
+    [selectedEventId]="this.selectedEventId">
+  </app-events-list>
   <div class="events">
     <app-event *ngFor="let event of this.events"
       [id]="'event_' + event.id"
