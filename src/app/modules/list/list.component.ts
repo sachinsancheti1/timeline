@@ -24,7 +24,7 @@ export class ListComponent {
   }
 
   @HostListener('window:scroll', ['$event'])
-  onWindowScroll($event: any) {
+  onWindowScroll() {
     let margin: number = Math.floor(window.innerHeight * 15 / 100);
 
     for(let i=0; i<events.length; i++) {
