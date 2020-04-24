@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { DataService } from '../../../data/data.service';
-
 
 @Component({
   selector: 'app-events-list',
   templateUrl: './events-list.component.html'
 })
-export class EventsListComponent implements OnInit {
+export class EventsListComponent {
+  @Output() eventSelect = new EventEmitter();
+
   list: any;
 
   currentEventId: number;
@@ -17,11 +18,8 @@ export class EventsListComponent implements OnInit {
     this.selectEvent(this.list[0].events[0].id);
   }
 
-  ngOnInit(): void {
-    
-  }
-
   selectEvent(eventId: number): void {
     this.currentEventId = eventId;
+    this.eventSelect.emit(eventId);
   }
 }

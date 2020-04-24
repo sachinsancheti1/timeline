@@ -10,13 +10,13 @@ export class EventComponent implements OnInit {
 
   loadedImageCount: number = 0;
   eventWidth: number;
-
   margin: number = 5;
 
   constructor(private renderer: Renderer2, private el:ElementRef) { }
 
   ngOnInit(): void {
     this.eventWidth = this.el.nativeElement.offsetWidth;
+    console.log(this.eventWidth);
   }
 
   onLoad($event: any): void {

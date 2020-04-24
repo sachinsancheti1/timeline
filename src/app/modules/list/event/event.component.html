@@ -1,4 +1,6 @@
-<img *ngFor="let image of this.event.images" #image
-  [src]="'assets/img/' + this.event.folder + '/' + image"
-  alt=""
-  (load)="onLoad($event)" />
+<div class="event-container">
+  <img *ngFor="let image of this.event.images" #image
+    [src]="'assets/img/' + this.event.folder + '/' + image"
+    alt=""
+    (load)="onLoad($event)" />
+</div>
