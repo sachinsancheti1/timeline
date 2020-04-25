@@ -30,14 +30,16 @@ export class ListComponent {
     for(let i=0; i<events.length; i++) {
       let el = document.getElementById('event_' + events[i].id);
 
-      // If event is at at least 15% of the screen from top
-      if(el.offsetTop > window.pageYOffset + margin) {
+      // If event fills 50% or more of the scree
+      if(el.offsetTop > window.pageYOffset + Math.round(window.innerHeight * 0.5)) {
         if(i > 0) {
           this.selectedEventId = events[i - 1].id;
         } else {
           this.selectedEventId = events[i].id;
         }
         break;
+      } else if(i == events.length - 1) {
+        this.selectedEventId = events[i].id;
       }
     }
   }

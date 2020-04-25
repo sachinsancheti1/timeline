@@ -22,13 +22,10 @@ export class EventsListComponent {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
-    let screenHeight: number = window.innerHeight;
-    let pageHeight: number = document.documentElement.scrollHeight;
-    let percentage: number = window.pageYOffset / (pageHeight - screenHeight);
-
-    let margin: number = Math.round(screenHeight * 0.2);
+    let percentage: number = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+    let margin: number = Math.round(window.innerHeight * 0.2);
     let start: number = margin;
-    let end: number = - this.el.nativeElement.querySelector('.list-container').offsetHeight + screenHeight - 2 * margin;
+    let end: number = - this.el.nativeElement.querySelector('.list-container').offsetHeight + window.innerHeight - 2 * margin;
     let top: number = Math.round(end * percentage + start);
 
     this.renderer.setStyle(this.el.nativeElement.querySelector('.list-container'), 'top', `${top}px`);
