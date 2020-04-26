@@ -18,7 +18,7 @@ export class EventComponent implements OnInit {
   constructor(private renderer: Renderer2, private el:ElementRef) { }
 
   ngOnInit(): void {
-    this.eventWidth = this.el.nativeElement.offsetWidth;
+    this.eventWidth = this.el.nativeElement.querySelector('.event-container').offsetWidth;
   }
 
   onLoad($event: any): void {

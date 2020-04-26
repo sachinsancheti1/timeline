@@ -87,6 +87,9 @@ html, body {
           .event-name.active {
             background-color: @selected-background-color;
 
+            .event-date {
+              display: inline;
+            }
             .event-name-text {
               color: @selected-color;
             }
@@ -111,11 +114,13 @@ html, body {
   }
   .events {
     app-event {
-      display: block;
-      width: 600px;
+      display: flex;
+      flex-direction: row;
+      width: 800px;
+      padding: 50px 0;
 
       .event-container {
-        padding: 50px 0;
+        width: 600px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -131,6 +136,19 @@ html, body {
       }
       .event-container:not(.visible) {
         opacity: 0;
+      }
+
+      .event-info {
+        padding-left: 20px;
+
+        .event-name {
+          color: #606060;
+          font-size: 18px;
+        }
+        .event-date {
+          color: #606060;
+          font-size: 14px;
+        }
       }
     }   
   }

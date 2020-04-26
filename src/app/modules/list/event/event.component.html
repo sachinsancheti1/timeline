@@ -6,3 +6,8 @@
     (load)="onLoad($event)"
     (click)="openImage(i)" />
 </div>
+
+<div class="event-info">
+  <div class="event-name">{{ this.event.name }}</div>
+  <div class="event-date">{{ this.event.formattedDate }}</div>
+</div>

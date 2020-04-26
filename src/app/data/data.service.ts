@@ -9,6 +9,8 @@ export class DataService {
   
   eventsList: any = [];
 
+  months: any = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
   constructor() {
     this.events = events;
     this.formatEventsList();
@@ -20,6 +22,7 @@ export class DataService {
 
     let currentId: number = 0;
     for(let i=0; i<this.events.length; i++) {
+      this.events[i].formattedDate = this.formatDate(this.events[i].date);
       if(this.events[i].date.length == 7) {
         this.events[i].date = this.events[i].date + '-00';
       }
@@ -59,6 +62,20 @@ export class DataService {
       }
     }
     return -1;
+  }
+  private formatDate(date: string): string {
+    if(date.length >= 7) {
+      let monthI: number = +date.substring(5, 7);
+
+      if(date.length == 7) {
+        return this.months[monthI] + ' ' + date.substring(0, 4);
+      } else if(date.length == 10) {
+        let day: number = +date.substring(8);
+        return this.months[monthI] + ' ' + day + ', ' + date.substring(0, 4);
+      }
+    }
+
+    return '';
   }
 
   // Get list with categories and events
