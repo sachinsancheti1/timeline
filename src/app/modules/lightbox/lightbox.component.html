@@ -1,0 +1,14 @@
+<div class="lightbox-container"
+ [ngClass]="{'hidden': !this.active}">
+  <!-- Image -->
+  <div *ngIf="this.event != null"
+    class="lightbox-image"
+    [style.background-image]="'url(assets/img/' + this.event.folder + '/' + this.event.images[this.imageI] + ')'">
+  </div>
+
+  <!-- Close button -->
+  <button class="close-button"
+    (click)="this.close()">
+    X
+  </button>
+</div>

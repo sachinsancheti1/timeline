@@ -1,7 +1,8 @@
 <div class="event-container"
   [ngClass]="{'visible': this.loaded}">
-  <img *ngFor="let image of this.event.images" #image
+  <img *ngFor="let image of this.event.images; let i = index;" #image
     [src]="'assets/img/' + this.event.folder + '/' + image"
     alt=""
-    (load)="onLoad($event)" />
+    (load)="onLoad($event)"
+    (click)="openImage(i)" />
 </div>

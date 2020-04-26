@@ -12,13 +12,16 @@ import { EventComponent } from './modules/list/event/event.component';
 
 import { MapComponent } from './modules/map/map.component';
 
+import { LightboxComponent } from './modules/lightbox/lightbox.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     ListComponent,
     EventsListComponent,
-    EventComponent
+    EventComponent,
+    LightboxComponent
   ],
   imports: [
     BrowserModule,

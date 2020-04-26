@@ -1,12 +1,23 @@
 <div class="list-container">
+  <!-- Events list -->
   <app-events-list
     (eventSelect)="displayEvent($event)"
     [selectedEventId]="this.selectedEventId">
   </app-events-list>
+
+  <!-- Events images -->
   <div class="events">
     <app-event *ngFor="let event of this.events"
       [id]="'event_' + event.id"
-      [event]="event">
+      [event]="event"
+      (openLightbox)="openLightbox($event)">
     </app-event>
   </div>
+
+  <!-- Full size display component -->
+  <app-lightbox
+    [eventId]="this.lightboxEventId"
+    [imageI]="this.lightboxImageI"
+    (closed)="this.lightboxClosed()">
+  </app-lightbox>
 </div>

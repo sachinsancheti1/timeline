@@ -14,7 +14,8 @@ export class DataService {
     this.formatEventsList();
   }
 
-  formatEventsList(): void {
+  // To init events list
+  private formatEventsList(): void {
     this.eventsList = [];
 
     let currentId: number = 0;
@@ -51,8 +52,7 @@ export class DataService {
       });
     }
   }
-
-  getEventListCategoryI(categoryName: string): number {
+  private getEventListCategoryI(categoryName: string): number {
     for(let i=0; i<this.eventsList.length; i++) {
       if(this.eventsList[i].name == categoryName) {
         return i;
@@ -76,5 +76,15 @@ export class DataService {
       return b.date.replace(/-/g, '') - a.date.replace(/-/g, '');
     });
     return events;
+  }
+
+  // Get event by id
+  getEvent(eventId: number): any {
+    for(let i=0; i<this.events.length; i++) {
+      if(this.events[i].id == eventId) {
+        return this.events[i];
+      }
+    }
+    return null;
   }
 }

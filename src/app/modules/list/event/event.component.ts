@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
 
 @Component({
   selector: 'app-event',
@@ -7,6 +7,7 @@ import { Component, OnInit, Input, ViewChildren, Renderer2, ElementRef, QueryLis
 export class EventComponent implements OnInit {
   @Input() event: any;
   @ViewChildren('image') images: QueryList<ElementRef>;
+  @Output() openLightbox = new EventEmitter();
 
   loadedImageCount: number = 0;
   eventWidth: number;
@@ -51,5 +52,12 @@ export class EventComponent implements OnInit {
       let newWidth: number = Math.floor((this.eventWidth - this.margin * (imagesArray.length - 2)) * percentageWidth);
       this.renderer.setStyle(imagesArray[i].nativeElement, 'width', `${newWidth}px`);
     }
+  }
+
+  openImage(imageI: number): void {
+    this.openLightbox.emit({
+      eventId: this.event.id,
+      imageI: imageI
+    });
   }
 }

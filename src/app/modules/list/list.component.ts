@@ -12,6 +12,9 @@ export class ListComponent {
 
   selectedEventId: number;
 
+  lightboxEventId: number = -1;
+  lightboxImageI: number = -1;
+
   constructor(private data: DataService) {
     this.events = this.data.getEvents();
     this.selectedEventId = this.events[0].id;
@@ -21,6 +24,16 @@ export class ListComponent {
     this.selectedEventId = eventId;
     let el = document.getElementById('event_' + eventId);
     el.scrollIntoView({behavior:"smooth"});
+  }
+
+  openLightbox($event: any): void {
+    this.lightboxEventId = $event.eventId;
+    this.lightboxImageI = $event.imageI;
+  }
+
+  lightboxClosed(): void {
+    this.lightboxEventId = -1;
+    this.lightboxImageI = -1;
   }
 
   @HostListener('window:scroll', ['$event'])
