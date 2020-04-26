@@ -28,6 +28,7 @@ html, body {
 
     .list-container {
       position: fixed;
+      max-width: 300px;
       top: calc(100vh * 0.2);
       display: flex;
       flex-direction: column;
@@ -62,12 +63,14 @@ html, body {
             
             .event-name-text {
               color: #202020;
+              line-height: 25px;
               .transition();
             }
             .event-name-cursor {
               margin-left: 30px;
               display: inline-block;
               width: 11px;
+              min-width: 11px;
               height: 11px;
               background-color: white;
               border: 2px solid #A0A0A0;
@@ -137,6 +140,7 @@ html, body {
 
       .event-info {
         padding-left: 20px;
+        max-width: 230px;
         .transition(@slow-time);
 
         .event-name {
@@ -209,6 +213,7 @@ app-lightbox {
 
         .event-info {
           width: 600px;
+          max-width: unset;
           padding: 0 0 10px;
           display: flex;
           flex-direction: row;
