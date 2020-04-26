@@ -134,12 +134,10 @@ html, body {
           cursor: pointer;
         } 
       }
-      .event-container:not(.visible) {
-        opacity: 0;
-      }
 
       .event-info {
         padding-left: 20px;
+        .transition(@slow-time);
 
         .event-name {
           color: #606060;
@@ -149,6 +147,11 @@ html, body {
           color: #606060;
           font-size: 14px;
         }
+      }
+
+      .event-container:not(.visible),
+      .event-info:not(.visible) {
+        opacity: 0;
       }
     }   
   }
