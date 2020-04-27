@@ -1,6 +1,7 @@
+<!-- If 4 or less images -->
 <div class="event-container"
   [ngClass]="{'visible': this.loaded}">
-  <img *ngFor="let image of this.event.images; let i = index;" #image
+  <img *ngFor="let image of this.imagesList; let i = index;" #image
     [src]="'assets/img/' + this.event.folder + '/' + image"
     alt=""
     (load)="onLoad($event)"

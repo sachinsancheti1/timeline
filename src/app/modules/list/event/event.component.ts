@@ -1,29 +1,41 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html'
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnChanges {
   @Input() event: any;
   @ViewChildren('image') images: QueryList<ElementRef>;
   @Output() openLightbox = new EventEmitter();
 
+  imagesList: any;
+
   loadedImageCount: number = 0;
   eventWidth: number;
+  maxImages: number = 4;
   margin: number = 5;
 
   loaded: boolean = false;
 
   constructor(private renderer: Renderer2, private el:ElementRef) { }
 
-  ngOnInit(): void {
-    this.eventWidth = this.el.nativeElement.querySelector('.event-container').offsetWidth;
+  ngOnChanges(): void {
+    if(this.event.images.length > this.maxImages) {
+      this.imagesList = this.event.images.slice(0, 4);
+    } else {
+      this.imagesList = this.event.images;
+    }
   }
 
   onLoad($event: any): void {
+    if(this.eventWidth === undefined) {
+      this.eventWidth = this.el.nativeElement.querySelector('.event-container').offsetWidth;
+    }
+
     this.loadedImageCount++;
-    if(this.loadedImageCount == this.event.images.length) {
+    if(this.loadedImageCount == this.event.images.length
+        || (this.event.images.length > this.maxImages) && this.loadedImageCount == this.maxImages) {
       this.resizeImages();
       this.loaded = true;
     }

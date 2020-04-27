@@ -31,5 +31,5 @@ export const events: any = [
 
   {name: 'Minca', date: '2020-03-01', longitude: 0, latitude: 0, folder: 'test', images: ['test.jpg', 'test.jpg', 'test2.jpg', 'test.jpg']},
   {name: 'Parque Tayrona', date: '2020-03-02', longitude: 0, latitude: 0, folder: 'test', images: ['test.jpg', 'test.jpg', 'test2.jpg', 'test.jpg']},
-  {name: 'Cartagena', date: '2020-03-03', longitude: 0, latitude: 0, folder: 'test', images: ['test.jpg', 'test.jpg', 'test.jpg', 'test.jpg']},
+  {name: 'Cartagena', date: '2020-03-03', longitude: 0, latitude: 0, folder: 'test', images: ['test.jpg', 'test.jpg', 'test.jpg', 'test2.jpg', 'test.jpg', 'test.jpg']},
 ];
