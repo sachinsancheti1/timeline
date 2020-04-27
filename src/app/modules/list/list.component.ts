@@ -21,9 +21,11 @@ export class ListComponent {
   }
 
   displayEvent(eventId: number): void {
-    this.selectedEventId = eventId;
     let el = document.getElementById('event_' + eventId);
-    el.scrollIntoView({behavior:"smooth"});
+
+    setTimeout(function(){
+      el.scrollIntoView({behavior:"smooth"});
+    }, 100);
   }
 
   openLightbox($event: any): void {
@@ -53,6 +55,49 @@ export class ListComponent {
         break;
       } else if(i == events.length - 1) {
         this.selectedEventId = events[i].id;
+      }
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeydownHandler(event: KeyboardEvent) {
+    // When modal is opened
+    if(this.lightboxEventId == -1) {
+      // Navigation keys
+      // Arrow up
+      if(event.keyCode == 38) {
+        event.preventDefault();
+        this.displayPreviousEvent();
+      }
+      // Arrow down
+      if(event.keyCode == 40) {
+        event.preventDefault();
+        this.displayNextEvent();
+      }
+
+      // Enter or space
+      if(event.keyCode == 13 || event.keyCode == 32) {
+        this.openLightbox({
+          eventId: this.selectedEventId,
+          imageI: 0
+        });
+      }
+    }
+  }
+
+  private displayPreviousEvent(): void {
+    for(let i=0; i<this.events.length; i++) {
+      if(this.events[i].id == this.selectedEventId && i > 0) {
+        this.displayEvent(this.events[i - 1].id);
+        break;
+      }
+    }
+  }
+  private displayNextEvent(): void {
+    for(let i=0; i<this.events.length; i++) {
+      if(this.events[i].id == this.selectedEventId && i < this.events.length - 1) {
+        this.displayEvent(this.events[i + 1].id);
+        break;
       }
     }
   }

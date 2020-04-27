@@ -53,11 +53,11 @@ export class LightboxComponent implements OnChanges {
         this.close();
       }
       // Navigation keys
-      // Left key
+      // Arrow left
       if(event.keyCode == 37) {
         this.browseImage(-1);
       }
-      // Right key
+      // Arrow right
       if(event.keyCode == 39) {
         this.browseImage(1);
       }
