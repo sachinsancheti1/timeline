@@ -15,6 +15,8 @@ export class ListComponent {
   lightboxEventId: number = -1;
   lightboxImageI: number = -1;
 
+  scrollTopButtonHidden: boolean = true;
+
   constructor(private data: DataService) {
     this.events = this.data.getEvents();
     this.selectedEventId = this.events[0].id;
@@ -38,10 +40,17 @@ export class ListComponent {
     this.lightboxImageI = -1;
   }
 
+  scrollTop(): void {
+    setTimeout(function(){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }, 100);
+  }
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     let margin: number = Math.floor(window.innerHeight * 15 / 100);
 
+    // Events
     for(let i=0; i<events.length; i++) {
       let el = document.getElementById('event_' + events[i].id);
 
@@ -56,6 +65,13 @@ export class ListComponent {
       } else if(i == events.length - 1) {
         this.selectedEventId = events[i].id;
       }
+    }
+
+    // Scroll top button
+    if(window.pageYOffset > 300 && this.scrollTopButtonHidden) {
+      this.scrollTopButtonHidden = false;
+    } else if(window.pageYOffset <= 300 && !this.scrollTopButtonHidden) {
+      this.scrollTopButtonHidden = true;
     }
   }
 

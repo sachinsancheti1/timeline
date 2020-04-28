@@ -21,6 +21,29 @@ html, body {
   flex-direction: row;
   justify-content: center;
 
+  .scroll-top-button {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid #A0A0A0;
+    border-radius: 25px;
+    color: #A0A0A0;
+    font-size: 18px;
+    opacity: 0.5;
+    cursor: pointer;
+    outline: none;
+    .transition();
+  }
+  .scroll-top-button:hover {
+    opacity: 1;
+  }
+  .scroll-top-button.hidden {
+    bottom: -50px;
+  }
+
   app-events-list {
     position: relative;
     width: 350px;
@@ -248,6 +271,9 @@ app-lightbox {
 
 @media (max-width: 1023px) {
   .list-container {
+    .scroll-top-button {
+      display: none;
+    }
     app-events-list {
       display: none;
     }

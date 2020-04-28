@@ -20,4 +20,11 @@
     [imageI]="this.lightboxImageI"
     (closed)="this.lightboxClosed()">
   </app-lightbox>
+
+  <!-- Scroll top button -->
+  <button class="scroll-top-button"
+    [ngClass]="{'hidden': this.scrollTopButtonHidden}"
+    (click)="this.scrollTop()">
+    ▲
+  </button>
 </div>
