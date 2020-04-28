@@ -171,12 +171,33 @@ app-lightbox {
     background-color: black;
     z-index: 10000;
 
-    .lightbox-image {
+    .lightbox-images {
       width: 100%;
       height: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
+
+      .lightbox-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        .transition(@lightbox-animation-time);
+      }
+      .lightbox-image.active {
+        left: 0;
+        opacity: 1;
+      }
+      .lightbox-image.left-hidden {
+        left: -100%;
+        opacity: 0;
+      }
+      .lightbox-image.right-hidden {
+        left: 100%;
+        opacity: 0;
+      }
     }
 
     .close-button {
