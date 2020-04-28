@@ -1,24 +1,26 @@
 # Timeline
 
-Developed by Romain Nugou ([romainnugou.com](https://romainnugou.com)).
+Developed by Romain Nugou ([romainnugou.com](https://romainnugou.com){:target="_blank"}).
 
 ## Demo
 
-Coming soon...
+[timeline.romainnugou.com](https://timeline.romainnugou.com){:target="_blank"}
 
 ## Start project
 
-Run `npm install` then `ng serve` for the dev server.
-Navigate to `http://localhost:4200/`
+Run `npm install` to install dependencies.
+Then run `ng serve` for the dev server (`http://localhost:4200/`).
 
 ## Add your photos
 
-Update `src/app/data/events.store.ts` with your events and photos.
+Update `src/app/data/events.store.ts` with your events and photos name.
 And then add your image files in `src/assets/img` with the rights folders set in `events.store.ts`.
 
 ## Build it
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+## About
 
+Built with Angular 9, Angular-CLI, Google Fonts and Font-Awesome.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
