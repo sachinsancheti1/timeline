@@ -1,10 +1,10 @@
 # Timeline
 
-Developed by Romain Nugou ([romainnugou.com](https://romainnugou.com){:target="_blank"}).
+Developed by Romain Nugou ([romainnugou.com](https://romainnugou.com)).
 
 ## Demo
 
-[timeline.romainnugou.com](https://timeline.romainnugou.com){:target="_blank"}
+[timeline.romainnugou.com](https://timeline.romainnugou.com)
 
 ## Start project
 
@@ -23,4 +23,3 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## About
 
 Built with Angular 9, Angular-CLI, Google Fonts and Font-Awesome.
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
