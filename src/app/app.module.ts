@@ -10,14 +10,11 @@ import { ListComponent } from './modules/list/list.component';
 import { EventsListComponent } from './modules/list/events-list/events-list.component';
 import { EventComponent } from './modules/list/event/event.component';
 
-import { MapComponent } from './modules/map/map.component';
-
 import { LightboxComponent } from './modules/lightbox/lightbox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent,
     ListComponent,
     EventsListComponent,
     EventComponent,
