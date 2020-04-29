@@ -15,6 +15,9 @@ export class EventComponent implements OnChanges {
   eventWidth: number;
   maxImages: number = 4;
   margin: number = 5;
+  
+  plusButtonWidth: number = 40;
+  plusButtonHeight: number = 0;
 
   loaded: boolean = false;
 
@@ -59,10 +62,20 @@ export class EventComponent implements OnChanges {
       relWidths[i] = relWidth;
       totalRelWidth += relWidth;
     }
+
+    let availableWidth: number = this.eventWidth;
+    // If there's a plus button
+    if(this.event.images.length > this.maxImages) {
+      availableWidth = availableWidth - this.plusButtonWidth - this.margin;
+    }
     for(let i=1; i<imagesArray.length; i++) {
       let percentageWidth: number = relWidths[i] / totalRelWidth;
-      let newWidth: number = Math.floor((this.eventWidth - this.margin * (imagesArray.length - 2)) * percentageWidth);
+      let newWidth: number = Math.floor((availableWidth - this.margin * (imagesArray.length - 2)) * percentageWidth);
       this.renderer.setStyle(imagesArray[i].nativeElement, 'width', `${newWidth}px`);
+    }
+    // If there's a plus button and its height isn't set yet
+    if(this.event.images.length > this.maxImages && this.plusButtonHeight == 0) {
+      this.plusButtonHeight = imagesArray[2].nativeElement.height;
     }
   }
 

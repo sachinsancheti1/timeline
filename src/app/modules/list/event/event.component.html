@@ -6,6 +6,14 @@
     alt=""
     (load)="onLoad($event)"
     (click)="openImage(i)" />
+
+  <div *ngIf="this.event.images.length > this.maxImages"
+    class="event-plus-button"
+    [style.height]="this.plusButtonHeight + 'px'"
+    [style.background-image]="'url(assets/img/' + this.event.folder + '/' + this.event.images[this.maxImages] + ')'"
+    (click)="openImage(this.maxImages)">
+    <i class="fas fa-plus"></i>
+  </div>
 </div>
 
 <div class="event-info"
