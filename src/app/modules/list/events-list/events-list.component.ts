@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, Renderer2, ElementRef, HostListener } from '@angular/core';
+import { Component, Output, EventEmitter, Input, AfterViewInit, Renderer2, ElementRef, HostListener } from '@angular/core';
 
 import { DataService } from '../../../data/data.service';
 
@@ -6,7 +6,7 @@ import { DataService } from '../../../data/data.service';
   selector: 'app-events-list',
   templateUrl: './events-list.component.html'
 })
-export class EventsListComponent {
+export class EventsListComponent implements AfterViewInit {
   @Input() selectedEventId: number;
   @Output() eventSelect = new EventEmitter();
 
@@ -16,18 +16,32 @@ export class EventsListComponent {
     this.list = this.data.getList();
   }
 
+  ngAfterViewInit(): void {
+    this.setListPosition();
+  }
+
   selectEvent(eventId: number): void {
     this.eventSelect.emit(eventId);
   }
 
+  setListPosition(): void {
+    let listHeight: number = this.el.nativeElement.querySelector('.list-container').offsetHeight;
+    let margin: number = Math.round(window.innerHeight * 0.2);
+
+    if(listHeight > (window.innerHeight - 2 * margin)) {
+      let percentage: number = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+      let start: number = margin;
+      let end: number = - listHeight + window.innerHeight - 2 * margin;
+      let top: number = Math.round(end * percentage + start);
+      this.renderer.setStyle(this.el.nativeElement.querySelector('.list-container'), 'top', `${top}px`);
+    } else {
+      let top: number = Math.round((window.innerHeight / 2) - (listHeight / 2));
+      this.renderer.setStyle(this.el.nativeElement.querySelector('.list-container'), 'top', `${top}px`);
+    }
+  }
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
-    let percentage: number = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
-    let margin: number = Math.round(window.innerHeight * 0.2);
-    let start: number = margin;
-    let end: number = - this.el.nativeElement.querySelector('.list-container').offsetHeight + window.innerHeight - 2 * margin;
-    let top: number = Math.round(end * percentage + start);
-
-    this.renderer.setStyle(this.el.nativeElement.querySelector('.list-container'), 'top', `${top}px`);
+    this.setListPosition();
   }
 }
