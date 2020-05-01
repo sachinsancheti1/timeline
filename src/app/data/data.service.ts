@@ -65,7 +65,7 @@ export class DataService {
   }
   private formatDate(date: string): string {
     if(date.length >= 7) {
-      let monthI: number = +date.substring(5, 7);
+      let monthI: number = +date.substring(5, 7) - 1;
 
       if(date.length == 7) {
         return this.months[monthI] + ' ' + date.substring(0, 4);
