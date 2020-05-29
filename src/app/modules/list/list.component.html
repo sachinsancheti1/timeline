@@ -21,8 +21,69 @@
     (closed)="this.lightboxClosed()">
   </app-lightbox>
 
+  <!-- Full size info overlay -->
+  <div class="info-overlay"
+    [ngClass]="{'hidden': this.infoOverlayHidden}">
+    <!-- Close button -->
+  <button class="close-button"
+    (click)="this.hideInfo()">
+    <i class="fas fa-times"></i>
+  </button>
+
+    <div class="info-section">
+      <div class="info-illustration">
+        <div class="key"><i class="fas fa-chevron-up"></i></div>
+        <div class="key"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="info-explaination">
+        Navigate between events
+      </div>
+    </div>
+    <div class="info-section">
+      <div class="info-illustration">
+        <div class="key"><i class="fas fa-chevron-left"></i></div>
+        <div class="key"><i class="fas fa-chevron-right"></i></div>
+      </div>
+      <div class="info-explaination">
+        Navigate between pictures in full-size mode
+      </div>
+    </div>
+    <div class="info-section">
+      <div class="info-illustration">
+        <div class="key adaptive-key">Enter</div>
+        <div class="key adaptive-key">Space</div>
+      </div>
+      <div class="info-explaination">
+        Enter pictures full-size mode of current event
+      </div>
+    </div>
+    <div class="info-section">
+      <div class="info-illustration">
+        <div class="key">i</div>
+      </div>
+      <div class="info-explaination">
+        Display info panel
+      </div>
+    </div>
+    <div class="info-section">
+      <div class="info-illustration">
+        <div class="key adaptive-key">Esc</div>
+      </div>
+      <div class="info-explaination">
+        Exit pictures full-size mode and info panel
+      </div>
+    </div>
+  </div>
+
+  <!-- Info button -->
+  <button class="right-button info-button"
+    [ngClass]="{'upper': !this.scrollTopButtonHidden}"
+    (click)="this.displayInfo()">
+    <i class="fas fa-info"></i>
+  </button>
+
   <!-- Scroll top button -->
-  <button class="scroll-top-button"
+  <button class="right-button scroll-top-button"
     [ngClass]="{'hidden': this.scrollTopButtonHidden}"
     (click)="this.scrollTop()">
     <i class="fas fa-arrow-up"></i>

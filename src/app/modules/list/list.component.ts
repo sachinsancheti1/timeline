@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Renderer2 } from '@angular/core';
 
 import { DataService } from '../../data/data.service';
 import { events } from 'src/app/data/events.store';
@@ -15,9 +15,10 @@ export class ListComponent {
   lightboxEventId: number = -1;
   lightboxImageI: number = -1;
 
+  infoOverlayHidden: boolean = true;
   scrollTopButtonHidden: boolean = true;
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private renderer: Renderer2) {
     this.events = this.data.getEvents();
     this.selectedEventId = this.events[0].id;
   }
@@ -38,6 +39,15 @@ export class ListComponent {
   lightboxClosed(): void {
     this.lightboxEventId = -1;
     this.lightboxImageI = -1;
+  }
+
+  displayInfo(): void {
+    this.infoOverlayHidden = false;
+    this.renderer.addClass(document.body, 'noscroll');
+  }
+  hideInfo(): void {
+    this.infoOverlayHidden = true;
+    this.renderer.removeClass(document.body, 'noscroll');
   }
 
   scrollTop(): void {
@@ -77,8 +87,8 @@ export class ListComponent {
 
   @HostListener('document:keydown', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
-    // When modal is opened
-    if(this.lightboxEventId == -1) {
+    // When lightbox and info panel aren't opened
+    if(this.lightboxEventId == -1 && this.infoOverlayHidden) {
       // Navigation keys
       // Arrow up
       if(event.keyCode == 38) {
@@ -97,6 +107,18 @@ export class ListComponent {
           eventId: this.selectedEventId,
           imageI: 0
         });
+      }
+    }
+    // When lightbox isn't opened
+    if(this.lightboxEventId == -1) {
+      // i
+      if(event.keyCode == 73) {
+        this.displayInfo();
+      }
+
+      // Esc
+      if(event.keyCode == 27) {
+        this.hideInfo();
       }
     }
   }
