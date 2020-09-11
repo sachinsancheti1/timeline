@@ -42,6 +42,7 @@ export class ListComponent {
   }
 
   displayInfo(): void {
+    document.getElementById('info-button').blur();
     this.infoOverlayHidden = false;
     this.renderer.addClass(document.body, 'noscroll');
   }
