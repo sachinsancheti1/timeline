@@ -23,7 +23,10 @@ export class LightboxComponent implements OnChanges {
       this.event = this.data.getEvent(this.eventId);
       if(this.event != null && this.imageI < this.event.images.length) {
         this.renderer.addClass(document.body, 'noscroll');
-        this.active = true;
+
+        setTimeout(() => {
+          this.active = true;
+        }, 50);
       }
     }
   }
@@ -48,17 +51,19 @@ export class LightboxComponent implements OnChanges {
   onKeydownHandler(event: KeyboardEvent) {
     // When modal is opened
     if(this.active) {
-      // Escape key
-      if(event.key == 'Escape') {
+      // Escape/Enter/Space
+      if(event.key == 'Escape' || event.key == 'Enter' || event.code == 'Space') {
+        event.preventDefault();
+
         this.close();
       }
       // Navigation keys
       // Arrow left
-      if(event.keyCode == 37) {
+      if(event.key == 'ArrowLeft') {
         this.browseImage(-1);
       }
       // Arrow right
-      if(event.keyCode == 39) {
+      if(event.key == 'ArrowRight') {
         this.browseImage(1);
       }
     }

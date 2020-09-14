@@ -107,37 +107,43 @@ export class ListComponent implements OnInit{
 
   @HostListener('document:keydown', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
-    // When lightbox and info panel aren't opened
+    // When lightbox and info panel aren't open
     if(this.lightboxEventId == -1 && this.infoOverlayHidden) {
       // Navigation keys
       // Arrow up
-      if(event.keyCode == 38) {
+      if(event.key == 'ArrowUp') {
         event.preventDefault();
         this.displayPreviousEvent();
       }
       // Arrow down
-      if(event.keyCode == 40) {
+      if(event.key == 'ArrowDown') {
         event.preventDefault();
         this.displayNextEvent();
       }
 
       // Enter or space
-      if(event.keyCode == 13 || event.keyCode == 32) {
+      if(event.key == 'Enter' || event.code == 'Space') {
+        event.preventDefault();
+
         this.openLightbox({
           eventId: this.selectedEventId,
           imageI: 0
         });
       }
     }
-    // When lightbox isn't opened
+    // When lightbox isn't open
     if(this.lightboxEventId == -1) {
       // i
-      if(event.keyCode == 73) {
-        this.displayInfo();
+      if(event.key == 'i') {
+        if(this.infoOverlayHidden) {
+          this.displayInfo();
+        } else {
+          this.hideInfo();
+        }
       }
 
       // Esc
-      if(event.keyCode == 27) {
+      if(event.key == 'Escape') {
         this.hideInfo();
       }
     }
