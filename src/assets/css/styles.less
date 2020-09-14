@@ -26,7 +26,7 @@ html, body {
     width: 40px;
     height: 40px;
     right: 30px;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.5);
     border: 2px solid #A0A0A0;
     border-radius: 25px;
     color: #A0A0A0;
@@ -370,9 +370,6 @@ app-lightbox {
 
 @media (max-width: 1023px) {
   .list-container {
-    .scroll-top-button {
-      display: none;
-    }
     app-events-list {
       display: none;
     }
@@ -383,17 +380,26 @@ app-lightbox {
 }
 
 @media (max-width: 767px) {
-  .list-container .events app-event {
-    width: 90vw;
-    padding: 7vw 0;
-
-    .event-container,
-    .event-info {
-      width: auto;
+  .list-container {
+    .right-button {
+      width: 35px;
+      right: 0;
+      padding-right: 0;
+      border-right: none;
+      border-radius: 25px 0 0 25px;
     }
-    .event-info {
-      flex-direction: column;
-      align-items: flex-start;
+    .events app-event {
+      width: 90vw;
+      padding: 7vw 0;
+  
+      .event-container,
+      .event-info {
+        width: auto;
+      }
+      .event-info {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   }
 }
