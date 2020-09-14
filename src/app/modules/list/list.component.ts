@@ -1,4 +1,4 @@
-import { Component, HostListener, Renderer2 } from '@angular/core';
+import { Component, HostListener, Renderer2, OnInit } from '@angular/core';
 
 import { DataService } from '../../data/data.service';
 import { events } from 'src/app/data/events.store';
@@ -7,8 +7,11 @@ import { events } from 'src/app/data/events.store';
   selector: 'app-list',
   templateUrl: './list.component.html'
 })
-export class ListComponent {
+export class ListComponent implements OnInit{
   events: any;
+  eventsList: any = [];
+
+  timer: any;
 
   selectedEventId: number;
 
@@ -21,6 +24,22 @@ export class ListComponent {
   constructor(private data: DataService, private renderer: Renderer2) {
     this.events = this.data.getEvents();
     this.selectedEventId = this.events[0].id;
+  }
+
+  ngOnInit(): void {
+    if(this.events.length > 0) {
+      this.eventsList.push(this.events[0]);
+    }
+
+    let index: number = 1;
+    this.timer = setInterval(() => {
+        if (index < this.events.length) {
+          this.eventsList.push(this.events[index]);
+          index++;
+        } else { 
+          clearInterval(this.timer); 
+        }
+    }, 250);
   }
 
   displayEvent(eventId: number): void {

@@ -80,9 +80,12 @@ export class EventComponent implements OnChanges {
   }
 
   openImage(imageI: number): void {
+    // let image: any = this.images.toArray()[imageI].nativeElement;
+    
     this.openLightbox.emit({
       eventId: this.event.id,
-      imageI: imageI
+      imageI: imageI,
+      // imageRect: image.getBoundingClientRect()
     });
   }
 }

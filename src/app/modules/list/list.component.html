@@ -7,7 +7,7 @@
 
   <!-- Events images -->
   <div class="events">
-    <app-event *ngFor="let event of this.events"
+    <app-event *ngFor="let event of this.eventsList"
       [id]="'event_' + event.id"
       [event]="event"
       (openLightbox)="openLightbox($event)">
