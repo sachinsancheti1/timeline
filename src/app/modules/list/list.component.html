@@ -1,7 +1,35 @@
 <div class="list-container">
+  <!-- Navigation -->
+  <div class="navigation">
+    <div class="navigation-mobile">
+      <!-- Mobile menu button -->
+      <button class="mobile-menu"
+        (click)="this.toggleMobileNavigation()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div class="navigation-global">
+      <!-- Info button -->
+      <button class="info-button"
+        id="info-button"
+        [ngClass]="{'upper': !this.scrollTopButtonHidden}"
+        (click)="this.displayInfo()">
+        <i class="fas fa-info"></i>
+      </button>
+      <!-- Scroll top button -->
+      <button class="scroll-top-button"
+        [ngClass]="{'hidden': this.scrollTopButtonHidden}"
+        (click)="this.scrollTop()">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </div>
+  </div>
+
   <!-- Events list -->
   <app-events-list
+    [ngClass]="{'hidden': !this.mobileNavigationOpen}"
     (eventSelect)="displayEvent($event)"
+    (closeMobileNavigationEvent)="closeMobileNavigation()"
     [selectedEventId]="this.selectedEventId">
   </app-events-list>
 
@@ -25,10 +53,10 @@
   <div class="info-overlay"
     [ngClass]="{'hidden': this.infoOverlayHidden}">
     <!-- Close button -->
-  <button class="close-button"
-    (click)="this.hideInfo()">
-    <i class="fas fa-times"></i>
-  </button>
+    <button class="close-button"
+      (click)="this.hideInfo()">
+      <i class="fas fa-times"></i>
+    </button>
 
     <div class="info-section">
       <div class="info-illustration">
@@ -74,19 +102,4 @@
       </div>
     </div>
   </div>
-
-  <!-- Info button -->
-  <button class="right-button info-button"
-    id="info-button"
-    [ngClass]="{'upper': !this.scrollTopButtonHidden}"
-    (click)="this.displayInfo()">
-    <i class="fas fa-info"></i>
-  </button>
-
-  <!-- Scroll top button -->
-  <button class="right-button scroll-top-button"
-    [ngClass]="{'hidden': this.scrollTopButtonHidden}"
-    (click)="this.scrollTop()">
-    <i class="fas fa-arrow-up"></i>
-  </button>
 </div>

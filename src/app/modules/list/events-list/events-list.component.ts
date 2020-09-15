@@ -9,6 +9,7 @@ import { DataService } from '../../../data/data.service';
 export class EventsListComponent implements AfterViewInit {
   @Input() selectedEventId: number;
   @Output() eventSelect = new EventEmitter();
+  @Output() closeMobileNavigationEvent = new EventEmitter();
 
   list: any;
 
@@ -22,6 +23,10 @@ export class EventsListComponent implements AfterViewInit {
 
   selectEvent(eventId: number): void {
     this.eventSelect.emit(eventId);
+  }
+
+  closeMobileNavigation(): void {
+    this.closeMobileNavigationEvent.emit();
   }
 
   setListPosition(): void {

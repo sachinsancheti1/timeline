@@ -13,6 +13,8 @@ export class ListComponent implements OnInit{
 
   timer: any;
 
+  mobileNavigationOpen: boolean = false;
+
   selectedEventId: number;
 
   lightboxEventId: number = -1;
@@ -44,9 +46,13 @@ export class ListComponent implements OnInit{
 
   displayEvent(eventId: number): void {
     let el = document.getElementById('event_' + eventId);
-
+    this.closeMobileNavigation();
     setTimeout(function(){
-      el.scrollIntoView({behavior:"smooth"});
+      let top: number = el.offsetTop;
+      if(window.innerWidth < 1024) {
+        top -= 60;
+      }
+      window.scroll({top: top, left: 0, behavior: 'smooth'})
     }, 100);
   }
 
@@ -67,6 +73,20 @@ export class ListComponent implements OnInit{
   }
   hideInfo(): void {
     this.infoOverlayHidden = true;
+    this.renderer.removeClass(document.body, 'noscroll');
+  }
+
+  toggleMobileNavigation(): void {
+    this.mobileNavigationOpen = !this.mobileNavigationOpen;
+
+    if(this.mobileNavigationOpen) {
+      this.renderer.addClass(document.body, 'noscroll');
+    } else {
+      this.renderer.removeClass(document.body, 'noscroll');
+    }
+  }
+  closeMobileNavigation(): void {
+    this.mobileNavigationOpen = false;
     this.renderer.removeClass(document.body, 'noscroll');
   }
 
@@ -107,8 +127,8 @@ export class ListComponent implements OnInit{
 
   @HostListener('document:keydown', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
-    // When lightbox and info panel aren't open
-    if(this.lightboxEventId == -1 && this.infoOverlayHidden) {
+    // When lightbox, info panel and mobile navigation aren't open
+    if(this.lightboxEventId == -1 && this.infoOverlayHidden && !this.mobileNavigationOpen) {
       // Navigation keys
       // Arrow up
       if(event.key == 'ArrowUp') {
@@ -131,8 +151,15 @@ export class ListComponent implements OnInit{
         });
       }
     }
+    // When mobile navigation is open
+    if(this.mobileNavigationOpen) {
+      // Esc
+      if(event.key == 'Escape') {
+        this.closeMobileNavigation();
+      }
+    }
     // When lightbox isn't open
-    if(this.lightboxEventId == -1) {
+    if(this.lightboxEventId == -1 && !this.mobileNavigationOpen) {
       // i
       if(event.key == 'i') {
         if(this.infoOverlayHidden) {

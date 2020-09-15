@@ -21,35 +21,43 @@ html, body {
   flex-direction: row;
   justify-content: center;
 
-  .right-button {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    right: 30px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 2px solid #A0A0A0;
-    border-radius: 25px;
-    color: #A0A0A0;
-    font-size: 20px;
-    opacity: 0.5;
-    cursor: pointer;
-    outline: none;
-    .transition();
-  }
-  .right-button:hover {
-    opacity: 1;
-  }
-  .info-button {
-    bottom: 30px;
-  }
-  .info-button.upper {
-    bottom: 80px;
-  }
-  .scroll-top-button {
-    bottom: 30px;
-  }
-  .scroll-top-button.hidden {
-    bottom: -50px;
+  .navigation {
+    button, a.button {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      right: 30px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: 2px solid #A0A0A0;
+      border-radius: 25px;
+      color: #A0A0A0;
+      font-size: 20px;
+      opacity: 0.5;
+      cursor: pointer;
+      outline: none;
+      .transition();
+    }
+    button:hover, a.button:hover {
+      opacity: 1;
+    }
+  
+    .navigation-mobile {
+      display: none;
+    }
+    .navigation-global {
+      .info-button {
+        bottom: 30px;
+      }
+      .info-button.upper {
+        bottom: 80px;
+      }
+      .scroll-top-button {
+        bottom: 30px;
+      }
+      .scroll-top-button.hidden {
+        bottom: -50px;
+      }
+    }
   }
 
   app-events-list {
@@ -57,6 +65,9 @@ html, body {
     width: 350px;
     height: 100vh;
 
+    .close-button {
+      display: none;
+    }
     .list-container {
       position: fixed;
       max-width: 300px;
@@ -277,7 +288,8 @@ app-lightbox {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.95);
   z-index: 10000;
   display: flex;
   flex-direction: column;
@@ -370,8 +382,116 @@ app-lightbox {
 
 @media (max-width: 1023px) {
   .list-container {
+    padding-top: 60px;
+
+    .navigation {
+      position: fixed;
+      top: 0;
+      width: calc(100% - 7vw);
+      padding: 0 3.5vw;
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background-color: white;
+      z-index: 1000;
+  
+      button {
+        position: relative;
+        top: unset;
+        left: unset;
+        right: unset;
+        bottom: unset;
+        background: none;
+        border: none;
+        color: black;
+        font-size: 24px;
+      }
+  
+      .navigation-mobile {
+        display: initial;
+      }
+      .navigation-global {
+        .info-button {
+          bottom: unset;
+          right: -40px;
+        }
+        .info-button.upper {
+          bottom: unset;
+          right: 0;
+        }
+        .scroll-top-button {
+          bottom: unset;
+          right: 0;
+        }
+        .scroll-top-button.hidden {
+          bottom: unset;
+          right: -100px;
+        }
+      }
+    }
+
+    app-events-list.hidden {
+      left: -100%;
+
+      .close-button {
+        left: -100%;
+      }
+    }
     app-events-list {
-      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: flex-start;
+      background-color: white;
+      z-index: 10000;
+      overflow: auto;
+      .transition();
+
+      .close-button {
+        display: inline-block;
+        position: fixed;
+        top: 4vw;
+        left: 4vw;
+        border: none;
+        background: none;
+        color: black;
+        font-size: 24px;
+        opacity: 0.5;
+        .transition();
+      }
+      .close-button:active {
+        opacity: 1;
+      }
+
+      .list-container {
+        position: relative;
+        max-width: initial;
+        width: 100%;
+        top: unset !important;
+        padding: 50px;
+
+        ul {
+          text-align: left;
+
+          li .event-name {
+            padding: 7px 30px;
+            display: flex;
+            justify-content: flex-start;
+            
+            .event-name-cursor {
+              display: none;
+            }
+          }
+        }
+        .line {
+          display: none;
+        }
+      }
     }
     .events app-event {
       width: 600px;
@@ -380,26 +500,17 @@ app-lightbox {
 }
 
 @media (max-width: 767px) {
-  .list-container {
-    .right-button {
-      width: 35px;
-      right: 0;
-      padding-right: 0;
-      border-right: none;
-      border-radius: 25px 0 0 25px;
+  .list-container .events app-event {
+    width: 90vw;
+    padding: 7vw 0;
+
+    .event-container,
+    .event-info {
+      width: auto;
     }
-    .events app-event {
-      width: 90vw;
-      padding: 7vw 0;
-  
-      .event-container,
-      .event-info {
-        width: auto;
-      }
-      .event-info {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .event-info {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 }
