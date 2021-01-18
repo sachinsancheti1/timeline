@@ -6,6 +6,8 @@ Developed by Romain Nugou ([romainnugou.com](https://romainnugou.com)).
 
 [timeline.romainnugou.com](https://timeline.romainnugou.com)
 
+Keyboard navigation available.
+
 ## Start project
 
 Run `npm install` to install dependencies.
